@@ -22,16 +22,13 @@ You may also see any lint errors in the console.
 
 In the project terminal, you can run:
 
-### 'react-router-dom'
+### 'npm install react-router-dom'
 
 React Router is used for handling routing in React applications.
 It allows you to create single-page applications with different views or pages while maintaining a smooth user experience.
 
-command to install is [npm install react-router-dom]
-
-### 'jitsi'
+### 'npm install @jitsi/react-sdk'
 
 Jitsi is an open-source video conferencing platform that allows you to integrate video conferencing capabilities into your React application. 
 
-command to install is [npm install @jitsi/react-sdk]
 
