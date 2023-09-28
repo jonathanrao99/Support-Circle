@@ -39,8 +39,8 @@ Jitsi is an open-source video conferencing platform that allows you to integrate
 
 ## Website Demo
 
-![Landing](Demo/1.jpg)
-![Addiction](Demo/2.jpg)
-![Date](Demo/3.jpg)
-![Time](Demo/4.jpg)
-![Jitsi](Demo/5.jpg)
+![Landing](https://github.com/jonathanrao99/Support-Circle/tree/main/Demo/1.jpg)
+![Addiction](https://github.com/jonathanrao99/Support-Circle/tree/main/Demo/2.jpg)
+![Date](https://github.com/jonathanrao99/Support-Circle/tree/main/Demo/3.jpg)
+![Time](https://github.com/jonathanrao99/Support-Circle/tree/main/Demo/4.jpg)
+![Jitsi](https://github.com/jonathanrao99/Support-Circle/tree/main/Demo/5.jpg)
