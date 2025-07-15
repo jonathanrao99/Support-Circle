@@ -12,6 +12,8 @@ const Hero = lazy(() => import('./components/Hero'));
 const Addiction = lazy(() => import('./components/Addiction'));
 const Drug = lazy(() => import('./components/Drug'));
 const Confirmation = lazy(() => import('./components/Confirmation'));
+const AITherapist = lazy(() => import('./components/AITherapist'));
+const AnalyticsDashboard = lazy(() => import('./components/AnalyticsDashboard'));
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
                   <Route path="/addiction" element={<Addiction />} />
                   <Route path="/drug" element={<Drug />} />
                   <Route path="/confirmation" element={<Confirmation />} />
+                  <Route path="/ai-therapist" element={<AITherapist />} />
+                  <Route path="/analytics" element={<AnalyticsDashboard />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </Suspense>

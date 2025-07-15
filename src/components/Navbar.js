@@ -11,7 +11,8 @@ function Navbar() {
 
   const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'About Us', href: '/about' },
+    { name: 'AI Therapist', href: '/ai-therapist' },
+    { name: 'Analytics', href: '/analytics' },
     { name: 'Services', href: '/services' },
     { name: 'Contact Us', href: '/contact' },
   ];
