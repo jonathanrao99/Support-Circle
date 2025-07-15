@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { 
-  BarChart, 
-  Bar, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  PieChart,
-  Pie,
-  Cell
-} from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  ArcElement,
+} from 'chart.js';
+import { Line, Bar, Doughnut } from 'react-chartjs-2';
 import {
   TrendingUp,
   Users,
@@ -25,6 +24,19 @@ import {
   Heart,
   Clock
 } from 'lucide-react';
+
+// Register Chart.js components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  ArcElement
+);
 
 function Dashboard() {
   const [activeTab, setActiveTab] = useState('overview');
@@ -75,16 +87,36 @@ function Dashboard() {
         data: [65, 72, 68, 75, 82, 88],
         borderColor: '#667eea',
         backgroundColor: 'rgba(102, 126, 234, 0.1)',
-        tension: 0.4
+        tension: 0.4,
+        fill: true
       },
       {
         label: 'Anxiety Level',
         data: [45, 38, 42, 35, 28, 22],
         borderColor: '#f093fb',
         backgroundColor: 'rgba(240, 147, 251, 0.1)',
-        tension: 0.4
+        tension: 0.4,
+        fill: true
       }
     ]
+  };
+
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: false,
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
   };
 
   const achievements = [
@@ -161,26 +193,8 @@ function Dashboard() {
         transition={{ duration: 0.8 }}
       >
         <h2 className="section-title">Progress Overview</h2>
-        <div className="chart-container">
-          <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={progressData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="labels" />
-              <YAxis />
-              <Tooltip />
-              {progressData.datasets.map((dataset, index) => (
-                <Line
-                  key={index}
-                  type="monotone"
-                  dataKey={dataset.label}
-                  stroke={dataset.borderColor}
-                  strokeWidth={3}
-                  dot={{ fill: dataset.borderColor, strokeWidth: 2, r: 6 }}
-                  activeDot={{ r: 8 }}
-                />
-              ))}
-            </LineChart>
-          </ResponsiveContainer>
+        <div className="chart-container" style={{ height: '300px' }}>
+          <Line data={progressData} options={chartOptions} />
         </div>
       </motion.div>
 
