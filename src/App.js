@@ -1,29 +1,66 @@
-import React from 'react';
-import './App.css';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
 import Footer from './components/Footer';
-import NewPage from './components/Addiction';
-import Drug from './components/Drug';
-import Video from './components/Confirmation';
+import LoadingSpinner from './components/LoadingSpinner';
+import ErrorBoundary from './components/ErrorBoundary';
+
+// Lazy load components for better performance
+const Hero = lazy(() => import('./components/Hero'));
+const Addiction = lazy(() => import('./components/Addiction'));
+const Drug = lazy(() => import('./components/Drug'));
+const Confirmation = lazy(() => import('./components/Confirmation'));
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Hero />} />
-          <Route path="/Addiction" element={<NewPage />} />
-          <Route path="/Drug" element={<Drug />} />
-          <Route path="/Confirmation" element={<Video />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <div className="App min-h-screen gradient-bg">
+          <ErrorBoundary>
+            <Navbar />
+            <main className="flex-1">
+              <Suspense fallback={<LoadingSpinner />}>
+                <Routes>
+                  <Route path="/" element={<Hero />} />
+                  <Route path="/addiction" element={<Addiction />} />
+                  <Route path="/drug" element={<Drug />} />
+                  <Route path="/confirmation" element={<Confirmation />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </main>
+            <Footer />
+          </ErrorBoundary>
+          <Toaster 
+            position="top-right"
+            toastOptions={{
+              duration: 4000,
+              style: {
+                background: '#363636',
+                color: '#fff',
+              },
+            }}
+          />
+        </div>
+      </Router>
+    </HelmetProvider>
   );
 }
+
+// 404 Not Found component
+const NotFound = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="text-center">
+      <h1 className="text-6xl font-bold text-primary-600 mb-4">404</h1>
+      <p className="text-xl text-gray-600 mb-8">Page not found</p>
+      <a href="/" className="btn-primary">
+        Go Home
+      </a>
+    </div>
+  </div>
+);
 
 export default App;
 
